@@ -13,13 +13,15 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
     '“We build practical technology solutions for complex problems and keep exploring what comes next.”';
   const author = t?.author || 'Aman MB , Founder , CEO Vector Space Dynamics';
 
-  // Card order
+  // Card order and photos
   const defaultStories = [
     {
       metric: '99.98%',
       subtitle: 'uptime across critical services',
       tags: ['Cloud', 'Infrastructure'],
       company: 'Enterprise Logistics Group',
+      image:
+        'https://framerusercontent.com/images/X5HQFA0qBC5uRsXoTi1bElG9kqY.jpg?width=400&height=500',
       quote: 'VSD brought the technical rigour and architectural clarity our systems desperately needed.',
     },
     {
@@ -27,6 +29,8 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
       subtitle: 'reduction in manual data triage',
       tags: ['AI Solutions', 'Automation'],
       company: 'Nexus Analytics',
+      image:
+        'https://framerusercontent.com/images/M3wrjjnomDYAHi0wywZoTjWMnQ.jpg?width=400&height=500',
       quote: 'Their AI pipelines delivered measurable accuracy from day one without over-promising.',
     },
     {
@@ -34,6 +38,8 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
       subtitle: 'throughput capacity expansion',
       tags: ['Distributed Systems', 'IT'],
       company: 'Apex Core Networks',
+      image:
+        'https://framerusercontent.com/images/oqA68SOIN1OMB9qd6EZcTZ7GE.jpg?width=400&height=500',
       quote: 'Disciplined engineering, clear communication, and seamless zero-downtime execution.',
     },
     {
@@ -41,6 +47,8 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
       subtitle: 'pipeline processing latency',
       tags: ['Data Engineering', 'Real-time'],
       company: 'Strata Tech Labs',
+      image:
+        'https://framerusercontent.com/images/09BK1jpZOxyhFZuSjrk2CActDI.jpg?width=400&height=500',
       quote: 'VSD solved our high-volume bottleneck where three other vendors failed.',
     },
     {
@@ -48,11 +56,18 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
       subtitle: 'compliance across audit frameworks',
       tags: ['Security', 'Governance'],
       company: 'Horizon Health Data',
+      image:
+        'https://framerusercontent.com/images/APsKWMFyzkyFhEt2kObMZZeXE.jpg?width=400&height=500',
       quote: 'Clear thinking, meticulous documentation, and dependable system security.',
     },
   ];
 
-  const stories = t?.items || defaultStories;
+  const stories = t?.items
+    ? t.items.map((item, idx) => ({
+        ...item,
+        image: defaultStories[idx % defaultStories.length].image,
+      }))
+    : defaultStories;
 
   // 3 identical sets for seamless continuous wrap without edge artifacts
   const marqueeItems = [...stories, ...stories, ...stories];
@@ -173,37 +188,40 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
             <div
               key={idx}
               onClick={() => onSelectStory && onSelectStory(`${story.company}: ${story.subtitle}`)}
-              className="group relative w-[260px] sm:w-[300px] h-[310px] sm:h-[350px] rounded-sm overflow-hidden flex flex-col justify-between p-6 sm:p-7 cursor-pointer shrink-0 border border-[#111317]/15 bg-[#0C0F17] hover:border-[#FF3E24]/50 shadow-md transition-all duration-300"
+              className="group relative w-[260px] sm:w-[300px] h-[310px] sm:h-[350px] rounded-sm overflow-hidden flex flex-col justify-between p-6 sm:p-7 cursor-pointer shrink-0 border border-black/10 shadow-sm"
             >
+              {/* Card Photo Background using optimized img element */}
+              <img
+                src={story.image}
+                alt={story.company}
+                className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+                loading="lazy"
+                decoding="async"
+              />
+
+              {/* Dark Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/30 pointer-events-none" />
+
               {/* Card Content Top: Number and Subtitle */}
               <div className="relative z-10 pointer-events-none">
                 <div className="font-sans text-3xl sm:text-4xl font-normal tracking-[-0.03em] text-white leading-none mb-2">
                   {story.metric}
                 </div>
-                <p className="text-xs sm:text-[13px] font-normal text-white/80 leading-snug">
+                <p className="text-xs sm:text-[13px] font-normal text-white/85 leading-snug">
                   {story.subtitle}
                 </p>
               </div>
 
-              {/* Card Company & Quote Preview */}
-              <div className="relative z-10 pointer-events-none">
-                <p className="text-xs text-white/60 italic leading-relaxed line-clamp-3 mb-4">
-                  "{story.quote}"
-                </p>
-                <div className="text-[11px] font-mono text-white/90 uppercase tracking-wider mb-3">
-                  {story.company}
-                </div>
-                {/* Card Tags Bottom */}
-                <div className="flex flex-wrap gap-1.5">
-                  {story.tags.map((tagItem, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="font-mono text-[9px] sm:text-[10px] uppercase tracking-wider px-2 py-0.5 bg-white/10 text-white/90 border border-white/10 rounded-sm"
-                    >
-                      {tagItem}
-                    </span>
-                  ))}
-                </div>
+              {/* Card Tags Bottom */}
+              <div className="relative z-10 flex flex-wrap gap-1.5 pointer-events-none">
+                {story.tags.map((tagItem, tIdx) => (
+                  <span
+                    key={tIdx}
+                    className="font-mono text-[9px] sm:text-[10px] uppercase tracking-wider px-2 py-0.5 bg-black/70 text-white/90 border border-white/20 rounded-sm"
+                  >
+                    {tagItem}
+                  </span>
+                ))}
               </div>
             </div>
           ))}

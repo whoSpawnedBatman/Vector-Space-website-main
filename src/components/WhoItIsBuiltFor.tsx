@@ -25,6 +25,9 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
       description:
         t?.tabs.finance.desc ||
         'We engineer secure, compliant, and observable IT infrastructure that eliminates downtime, modernizes legacy bottlenecks, and protects data integrity.',
+      image:
+        'https://framerusercontent.com/images/HTHMXqJ1BOJIT1QD7yRnwyb2OU.jpg?width=1000&height=700',
+      alt: 'Enterprise engineering team reviewing architecture',
     },
     {
       id: 'operations',
@@ -33,6 +36,9 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
       description:
         t?.tabs.operations.desc ||
         'From specialized LLM integrations to high-throughput data processing pipelines, we take AI beyond proof-of-concept into reliable day-to-day operations.',
+      image:
+        'https://framerusercontent.com/images/5TuC8dag5g29D54MoXnUDLODdm4.jpg?width=1000&height=700',
+      alt: 'Product team testing machine learning models',
     },
     {
       id: 'growing',
@@ -41,6 +47,9 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
       description:
         t?.tabs.growing.desc ||
         'When rapid expansion challenges your software foundation, we deliver structured engineering that supports velocity without sacrificing system health.',
+      image:
+        'https://framerusercontent.com/images/OnT1fUCQdan90tc3Balfx9F7RI.jpg?width=1000&height=700',
+      alt: 'Fast growing engineering team collaborating',
     },
     {
       id: 'founders',
@@ -49,6 +58,9 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
       description:
         t?.tabs.founders.desc ||
         'We help ambitious technical leaders investigate complex questions, validate experimental prototypes, and turn research into production-grade reality.',
+      image:
+        'https://framerusercontent.com/images/5exrwTUKDpScrCcdckQ2bW20Q.jpg?width=1000&height=700',
+      alt: 'R&D leaders exploring computational research',
     },
   ];
 
@@ -96,26 +108,40 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
             })}
           </div>
 
-          {/* Active Tab Content Area */}
-          <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-16 min-h-[360px]">
-            <div className="space-y-6 max-w-2xl">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-white leading-snug">
-                {currentTab.heading}
-              </h3>
-              <p className="text-white/70 text-base sm:text-lg leading-relaxed font-normal">
-                {currentTab.description}
-              </p>
+          {/* Active Tab Content Area: 50/50 split with flush image on right */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch">
+            {/* Left Column: Text & CTA */}
+            <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-14 min-h-[420px] sm:min-h-[500px]">
+              <div className="space-y-6 max-w-lg">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-white leading-snug">
+                  {currentTab.heading}
+                </h3>
+                <p className="text-white/70 text-sm sm:text-base leading-relaxed font-normal">
+                  {currentTab.description}
+                </p>
+              </div>
+              <div className="pt-8">
+                <RollButton
+                  variant="primary"
+                  size="md"
+                  onClick={onOpenDemo}
+                  aria-label={cta}
+                  className="rounded-sm bg-[#FF3E24] hover:bg-[#e6351d] text-white font-mono text-xs tracking-wider uppercase px-6 py-3 border-0 shadow-lg shadow-[#FF3E24]/20"
+                >
+                  {cta}
+                </RollButton>
+              </div>
             </div>
-            <div className="pt-10">
-              <RollButton
-                variant="primary"
-                size="md"
-                onClick={onOpenDemo}
-                aria-label={cta}
-                className="rounded-sm bg-[#FF3E24] hover:bg-[#e6351d] text-white font-mono text-xs tracking-wider uppercase px-6 py-3 border-0 shadow-lg shadow-[#FF3E24]/20"
-              >
-                {cta}
-              </RollButton>
+
+            {/* Right Column: High-Res Photo flush with card edges */}
+            <div className="relative w-full h-[360px] sm:h-[460px] lg:h-auto min-h-full border-t lg:border-t-0 lg:border-l border-white/15 overflow-hidden">
+              <img
+                key={currentTab.id}
+                src={currentTab.image}
+                alt={currentTab.alt}
+                className="w-full h-full object-cover animate-in fade-in duration-300"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

@@ -20,9 +20,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, t }) => {
   const attribution = t?.attribution || 'VECTOR SPACE DYNAMICS';
 
   return (
-    <footer className="w-full flex flex-col border-t border-white/10">
-      {/* Main Footer */}
-      <div className="relative overflow-hidden text-white flex flex-col justify-between min-h-[440px] lg:min-h-[480px] px-6 sm:px-12 lg:px-20 pt-16 sm:pt-20 pb-10 sm:pb-12 bg-[#06080F]">
+    <footer className="w-full flex flex-col">
+      {/* Top Sketches Banner on Warm Cream Background (Characters sitting on the grass edge) */}
+      <div className="w-full bg-[#F9F9F7] pt-8 sm:pt-10 pb-0 flex items-end justify-center overflow-hidden">
+        <img
+          src="/assets/sketch-banner.png"
+          alt="Vector Space Dynamics sketches banner"
+          className="h-16 sm:h-20 lg:h-24 w-auto object-contain max-w-full select-none pointer-events-none translate-y-[2px]"
+        />
+      </div>
+
+      {/* Main Footer with Light Streaks Background Photo */}
+      <div className="relative overflow-hidden text-white flex flex-col justify-between min-h-[480px] lg:min-h-[520px] px-6 sm:px-12 lg:px-20 pt-12 sm:pt-16 pb-10 sm:pb-12">
+        {/* Light Streaks Background Photo */}
+        <div
+          className="absolute inset-0 bg-cover bg-center pointer-events-none"
+          style={{
+            backgroundImage: `url('/assets/light-streaks.jpg')`,
+            backgroundPosition: 'center',
+          }}
+        />
+
+        {/* Atmospheric Contrast Layer */}
+        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
 
         {/* Top Footer Content */}

@@ -26,8 +26,16 @@ export const Hero: React.FC<HeroProps> = ({
 
   return (
     <section className="relative min-h-[92vh] sm:min-h-screen pt-32 sm:pt-40 flex flex-col justify-between overflow-hidden bg-black">
-      {/* Ambient Dark Background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden bg-gradient-to-b from-[#050B1E] via-[#02050D] to-black" />
+      {/* Hero Earth Wallpaper Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <img
+          src="/assets/hero-earth.webp"
+          alt="Vector Space Dynamics Earth Wallpaper"
+          className="w-full h-full object-cover object-center scale-105"
+        />
+        {/* Subtle cinematic gradient vignette for text legibility and smooth depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90 pointer-events-none" />
+      </div>
 
       {/* Top Hero Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center my-auto py-12">

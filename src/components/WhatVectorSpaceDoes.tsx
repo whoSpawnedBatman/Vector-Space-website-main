@@ -14,18 +14,27 @@ export const WhatVectorSpaceDoes: React.FC<WhatVectorSpaceDoesProps> = ({ t }) =
   const cards = [
     {
       label: t?.cards.individuals.title || 'ARTIFICIAL INTELLIGENCE & ML',
+      image:
+        'https://framerusercontent.com/images/GbwK5Grd5cWLJuDTgALWacTt5Cs.png?width=439&height=560',
+      alt: 'Hand drawn sketch of person with laptop and coffee',
       desc:
         t?.cards.individuals.desc ||
         'Purpose-built intelligent models, retrieval pipelines, and automation systems engineered for operational accuracy.',
     },
     {
       label: t?.cards.growingTeams.title || 'CLOUD & IT INFRASTRUCTURE',
+      image:
+        'https://framerusercontent.com/images/AzgtOBiCfs2fkWOrNdrTl5JCWI.png?width=1161&height=987',
+      alt: 'Hand drawn sketch of person riding a rocket ship',
       desc:
         t?.cards.growingTeams.desc ||
         'High-availability architecture, resilient backends, and enterprise systems that scale without technical debt.',
     },
     {
       label: t?.cards.financeOps.title || 'APPLIED RESEARCH & R&D',
+      image:
+        'https://framerusercontent.com/images/pmxeD64hHKa0fiWWoqiFzgw8SQ.png?width=394&height=560',
+      alt: 'Hand drawn sketch of person putting together puzzle pieces',
       desc:
         t?.cards.financeOps.desc ||
         'Disciplined exploration of cutting-edge algorithms, simulation frameworks, and boundary-pushing engineering.',
@@ -50,17 +59,27 @@ export const WhatVectorSpaceDoes: React.FC<WhatVectorSpaceDoesProps> = ({ t }) =
           {cards.map((card, idx) => (
             <div
               key={idx}
-              className="group relative bg-[#F0EFE9] border border-[#111317]/10 rounded-sm p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:border-[#111317]/25 hover:-translate-y-1 cursor-pointer min-h-[220px]"
+              className="group relative bg-[#F0EFE9] border border-[#111317]/10 rounded-sm p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:border-[#111317]/25 hover:-translate-y-1 cursor-pointer"
             >
-              {/* Card Tag Top */}
+              {/* Card Tag Top or Bottom */}
               <div className="mb-6 flex items-center justify-between">
                 <span className="font-mono text-xs font-semibold tracking-wider text-[#111317]/80">
                   {card.label}
                 </span>
               </div>
 
-              {/* Card text */}
-              <p className="text-xs sm:text-sm text-[#111317]/70 leading-relaxed mt-2">
+              {/* Hand Drawn Illustration */}
+              <div className="relative aspect-square w-full flex items-center justify-center overflow-hidden my-4">
+                <img
+                  src={card.image}
+                  alt={card.alt}
+                  className="max-h-full max-w-full object-contain filter contrast-125 transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Card bottom text */}
+              <p className="text-xs sm:text-sm text-[#111317]/60 leading-normal mt-4">
                 {card.desc}
               </p>
             </div>

@@ -37,8 +37,16 @@ export const GetStarted: React.FC<GetStartedProps> = ({ onSuccessDemo, t }) => {
 
   return (
     <section className="relative py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden text-white flex flex-col justify-center items-center min-h-[480px] sm:min-h-[540px]">
-      {/* Ambient Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0D14] via-[#050B1E] to-[#0A0D14] pointer-events-none" />
+      {/* Cinematic Motion-Blurred Running Man Background Photo */}
+      <div
+        className="absolute inset-0 bg-cover bg-center pointer-events-none"
+        style={{
+          backgroundImage: `url('/assets/running-man.jpg')`,
+          backgroundPosition: 'center 40%',
+        }}
+      />
+      {/* Subtle darkening overlay so text is crisp while preserving sunset photo vibrancy */}
+      <div className="absolute inset-0 bg-black/25 pointer-events-none" />
 
       <div className="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center">
         {/* Headline */}

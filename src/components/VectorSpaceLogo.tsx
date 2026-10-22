@@ -16,28 +16,21 @@ export const VectorSpaceSymbol: React.FC<{
   className?: string;
   variant?: 'white' | 'primary' | 'dark';
 }> = ({ size = 26, className = '', variant = 'white' }) => {
-  const color =
-    variant === 'primary' ? '#FF3E24' : variant === 'dark' ? '#111317' : '#FFFFFF';
+  const src =
+    variant === 'primary'
+      ? '/assets/vsd-symbol-primary.png'
+      : variant === 'dark'
+      ? '/assets/vsd-symbol-dark.png'
+      : '/assets/vsd-symbol-white.png';
 
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={`shrink-0 select-none ${className}`}
-      aria-label="Vector Space Dynamics Symbol"
-    >
-      <polygon
-        points="12,2 22,20 12,16 2,20"
-        fill="none"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="11" r="2" fill={color} />
-    </svg>
+    <img
+      src={src}
+      alt="Vector Space Dynamics Symbol"
+      style={{ height: `${size}px`, width: 'auto' }}
+      className={`shrink-0 object-contain select-none pointer-events-none ${className}`}
+      loading="eager"
+    />
   );
 };
 
