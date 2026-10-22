@@ -26,7 +26,7 @@ export const VectorSpaceSymbol: React.FC<{
       width={size}
       height={size}
       alt="Vector Space Dynamics Symbol"
-      style={{ height: `${size}px`, width: 'auto' }}
+      style={{ height: `${size}px`, width: `${size}px` }}
       className={`shrink-0 object-contain select-none pointer-events-none ${className}`}
       loading="eager"
       decoding="async"
@@ -41,7 +41,7 @@ export const VectorSpaceLogo: React.FC<VectorSpaceLogoProps> = ({
   iconOnly = false,
   text,
   variant = 'white',
-  nameVariant = 'responsive',
+  nameVariant = 'full',
   href = '#',
 }) => {
   const renderText = () => {
@@ -49,18 +49,9 @@ export const VectorSpaceLogo: React.FC<VectorSpaceLogoProps> = ({
       return <span>{text}</span>;
     }
     if (nameVariant === 'short') {
-      return <span>VECTOR SPACE</span>;
+      return <span>Vector Space</span>;
     }
-    if (nameVariant === 'full') {
-      return <span>VECTOR SPACE DYNAMICS</span>;
-    }
-    // Responsive: 'VECTOR SPACE' on compact screens, 'VECTOR SPACE DYNAMICS' on sm+
-    return (
-      <>
-        <span>VECTOR SPACE</span>
-        <span className="hidden sm:inline">&nbsp;DYNAMICS</span>
-      </>
-    );
+    return <span>Vector Space Dynamics</span>;
   };
 
   return (
@@ -71,7 +62,7 @@ export const VectorSpaceLogo: React.FC<VectorSpaceLogoProps> = ({
     >
       <VectorSpaceSymbol size={size} variant={variant} />
       {!iconOnly && (
-        <span className="font-['Michroma',sans-serif] text-[11.5px] sm:text-[13px] uppercase tracking-[0.15em] font-normal leading-tight select-none whitespace-nowrap">
+        <span className="font-sans font-medium text-[13.5px] sm:text-[15px] tracking-[-0.015em] leading-none select-none whitespace-nowrap">
           {renderText()}
         </span>
       )}
