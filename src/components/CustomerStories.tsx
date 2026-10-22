@@ -20,8 +20,8 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
       subtitle: 'uptime across critical services',
       tags: ['Cloud', 'Infrastructure'],
       company: 'Enterprise Logistics Group',
-      image:
-        'https://framerusercontent.com/images/X5HQFA0qBC5uRsXoTi1bElG9kqY.jpg?width=400&height=500',
+      image: '/assets/stories/story-1-600.webp',
+      srcSet: '/assets/stories/story-1-300.webp 300w, /assets/stories/story-1-600.webp 600w',
       quote: 'VSD brought the technical rigour and architectural clarity our systems desperately needed.',
     },
     {
@@ -29,8 +29,8 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
       subtitle: 'reduction in manual data triage',
       tags: ['AI Solutions', 'Automation'],
       company: 'Nexus Analytics',
-      image:
-        'https://framerusercontent.com/images/M3wrjjnomDYAHi0wywZoTjWMnQ.jpg?width=400&height=500',
+      image: '/assets/stories/story-2-600.webp',
+      srcSet: '/assets/stories/story-2-300.webp 300w, /assets/stories/story-2-600.webp 600w',
       quote: 'Their AI pipelines delivered measurable accuracy from day one without over-promising.',
     },
     {
@@ -38,8 +38,8 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
       subtitle: 'throughput capacity expansion',
       tags: ['Distributed Systems', 'IT'],
       company: 'Apex Core Networks',
-      image:
-        'https://framerusercontent.com/images/oqA68SOIN1OMB9qd6EZcTZ7GE.jpg?width=400&height=500',
+      image: '/assets/stories/story-3-600.webp',
+      srcSet: '/assets/stories/story-3-300.webp 300w, /assets/stories/story-3-600.webp 600w',
       quote: 'Disciplined engineering, clear communication, and seamless zero-downtime execution.',
     },
     {
@@ -47,8 +47,8 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
       subtitle: 'pipeline processing latency',
       tags: ['Data Engineering', 'Real-time'],
       company: 'Strata Tech Labs',
-      image:
-        'https://framerusercontent.com/images/09BK1jpZOxyhFZuSjrk2CActDI.jpg?width=400&height=500',
+      image: '/assets/stories/story-4-600.webp',
+      srcSet: '/assets/stories/story-4-300.webp 300w, /assets/stories/story-4-600.webp 600w',
       quote: 'VSD solved our high-volume bottleneck where three other vendors failed.',
     },
     {
@@ -56,8 +56,8 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
       subtitle: 'compliance across audit frameworks',
       tags: ['Security', 'Governance'],
       company: 'Horizon Health Data',
-      image:
-        'https://framerusercontent.com/images/APsKWMFyzkyFhEt2kObMZZeXE.jpg?width=400&height=500',
+      image: '/assets/stories/story-5-600.webp',
+      srcSet: '/assets/stories/story-5-300.webp 300w, /assets/stories/story-5-600.webp 600w',
       quote: 'Clear thinking, meticulous documentation, and dependable system security.',
     },
   ];
@@ -66,6 +66,7 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
     ? t.items.map((item, idx) => ({
         ...item,
         image: defaultStories[idx % defaultStories.length].image,
+        srcSet: defaultStories[idx % defaultStories.length].srcSet,
       }))
     : defaultStories;
 
@@ -100,38 +101,59 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
     measureSetWidth();
     window.addEventListener('resize', measureSetWidth, { passive: true });
 
-    // Track scroll position
+    // Only do scroll math while the marquee is near the viewport
+    let isVisible = false;
+    const visibilityObserver = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0]?.isIntersecting ?? false;
+        const el = trackRef.current;
+        if (!el) return;
+        // Only promote the wide track to its own GPU layer while on screen
+        el.style.willChange = isVisible ? 'transform' : 'auto';
+        if (!isVisible) el.style.transform = 'none';
+      },
+      { rootMargin: '200px' }
+    );
+    visibilityObserver.observe(section);
+
     let lastScroll = window.scrollY;
+    let pendingScroll = window.scrollY;
     let currentX = 0;
+    let rafId = 0;
 
-    const onScrollUpdate = (scrollY: number) => {
-      if (!trackRef.current || !sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      // Skip transform calculations if section is far outside the viewport
-      if (rect.top > window.innerHeight + 300 || rect.bottom < -300) {
-        lastScroll = scrollY;
-        return;
-      }
-
-      const delta = scrollY - lastScroll;
-      lastScroll = scrollY;
+    const render = () => {
+      if (!trackRef.current) return;
+      const delta = pendingScroll - lastScroll;
+      lastScroll = pendingScroll;
 
       // Scroll speed factor
       currentX += delta * 0.75;
 
       const setWidth = setWidthRef.current || stories.length * 320;
       const wrappedX = ((currentX % setWidth) + setWidth) % setWidth;
+      currentX = wrappedX;
 
       trackRef.current.style.transform = `translate3d(${-wrappedX}px, 0, 0)`;
     };
 
+    const onScrollUpdate = (scrollY: number) => {
+      if (!isVisible) {
+        lastScroll = scrollY;
+        return;
+      }
+      pendingScroll = scrollY;
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        render();
+      });
+    };
+
     // Attach to Lenis
     let unsubscribeLenis: (() => void) | null = null;
-    let hasLenis = false;
 
     const attachLenis = (lenis: any) => {
       if (!lenis || unsubscribeLenis) return;
-      hasLenis = true;
       const onLenisScroll = (e: any) => {
         const scrollY = typeof e.scroll === 'number' ? e.scroll : window.scrollY;
         onScrollUpdate(scrollY);
@@ -143,33 +165,37 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
     };
 
     const globalLenis = (window as any).__lenis;
+    const handleLenisReady = (e: any) => {
+      attachLenis(e.detail || (window as any).__lenis);
+    };
     if (globalLenis) {
       attachLenis(globalLenis);
     } else {
-      const handleLenisReady = (e: any) => {
-        attachLenis(e.detail || (window as any).__lenis);
-      };
       window.addEventListener('lenis-ready', handleLenisReady);
     }
 
     // Native scroll fallback
     const onNativeScroll = () => {
-      if (hasLenis) return;
+      if (unsubscribeLenis) return;
       onScrollUpdate(window.scrollY);
     };
     window.addEventListener('scroll', onNativeScroll, { passive: true });
 
     return () => {
+      visibilityObserver.disconnect();
       window.removeEventListener('resize', measureSetWidth);
       window.removeEventListener('scroll', onNativeScroll);
+      window.removeEventListener('lenis-ready', handleLenisReady);
+      if (rafId) cancelAnimationFrame(rafId);
       if (unsubscribeLenis) unsubscribeLenis();
     };
   }, [stories.length]);
 
   return (
     <section
+      id="stories"
       ref={sectionRef}
-      className="bg-[#F9F9F7] text-[#111317] py-24 sm:py-32 overflow-hidden border-b border-[#111317]/10"
+      className="bg-[#F9F9F7] text-[#111317] py-24 sm:py-32 overflow-hidden border-b border-[#111317]/10 scroll-mt-20"
     >
       <div className="max-w-6xl mx-auto px-6 sm:px-10 mb-14 text-center">
         {/* Section Heading */}
@@ -193,10 +219,15 @@ export const CustomerStories: React.FC<StoryModalProps> = ({ onSelectStory, t })
               {/* Card Photo Background using optimized img element */}
               <img
                 src={story.image}
+                srcSet={story.srcSet}
+                sizes="(max-width: 640px) 260px, 300px"
+                width={600}
+                height={900}
                 alt={story.company}
                 className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
                 loading="lazy"
                 decoding="async"
+                draggable={false}
               />
 
               {/* Dark Gradient Overlay */}

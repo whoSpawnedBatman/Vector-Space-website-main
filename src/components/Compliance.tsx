@@ -15,25 +15,25 @@ export const Compliance: React.FC<ComplianceProps> = ({ t }) => {
     {
       title: 'Precision',
       desc: 'We value clear thinking, sound engineering, rigour and meticulous attention to detail in every system.',
-      icon: 'https://framerusercontent.com/images/CAnJ5noRyWD2uzHJILWuQtFKOY8.svg',
+      icon: '/assets/principles/principle-1.svg',
       alt: 'Precision emblem',
     },
     {
       title: 'Curiosity',
       desc: 'We question assumptions, investigate complex problems deeply, and keep learning relentlessly.',
-      icon: 'https://framerusercontent.com/images/GuuKEsTnWXcAVnuhU2DEpIur8M.svg',
+      icon: '/assets/principles/principle-2.svg',
       alt: 'Curiosity emblem',
     },
     {
       title: 'Progress',
       desc: 'We build practical solutions, test ideas through rigorous validation, and improve through continuous iteration.',
-      icon: 'https://framerusercontent.com/images/EOSJ9ljHHBOrHVxxOj7jX6Muano.svg',
+      icon: '/assets/principles/principle-3.svg',
       alt: 'Progress emblem',
     },
     {
       title: 'Exploration',
       desc: 'We pursue ambitious questions with discipline and an open mind toward the future of technology and space.',
-      icon: 'https://framerusercontent.com/images/8sg0e3ydrJwv3hOIdv8SAtp4Ls.svg',
+      icon: '/assets/principles/principle-4.svg',
       alt: 'Exploration emblem',
     },
   ];
@@ -47,7 +47,7 @@ export const Compliance: React.FC<ComplianceProps> = ({ t }) => {
     : defaultCertifications;
 
   return (
-    <section className="bg-[#0A0D14] text-white py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-b border-white/10">
+    <section id="principles" className="bg-[#0A0D14] text-white py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-b border-white/10 scroll-mt-20">
       <div className="max-w-6xl mx-auto">
         {/* 4 Cards Grid with Watermark Emblems */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
@@ -70,8 +70,11 @@ export const Compliance: React.FC<ComplianceProps> = ({ t }) => {
                 <img
                   src={item.icon}
                   alt={item.alt}
+                  width={48}
+                  height={48}
                   className="w-12 h-12 object-contain opacity-30 group-hover:opacity-50 transition-opacity duration-300 filter brightness-110"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

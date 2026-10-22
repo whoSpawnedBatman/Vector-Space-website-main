@@ -21,9 +21,9 @@ const StatItem: React.FC<StatItemProps> = ({
   labelTop,
   labelBottom,
 }) => {
-  const [currentValue, setCurrentValue] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const valueRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -48,29 +48,31 @@ const StatItem: React.FC<StatItemProps> = ({
   useEffect(() => {
     if (!hasAnimated) return;
 
+    let rafId = 0;
     let startTimestamp: number | null = null;
     const duration = 1500; // ms
 
     const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
+      if (startTimestamp === null) startTimestamp = timestamp;
       const elapsed = timestamp - startTimestamp;
       const progress = Math.min(elapsed / duration, 1);
       const val = calculateCounterValue(0, endValue, progress);
-      setCurrentValue(val);
+      if (valueRef.current) valueRef.current.textContent = String(val);
 
       if (progress < 1) {
-        window.requestAnimationFrame(step);
+        rafId = window.requestAnimationFrame(step);
       }
     };
 
-    window.requestAnimationFrame(step);
+    rafId = window.requestAnimationFrame(step);
+    return () => window.cancelAnimationFrame(rafId);
   }, [hasAnimated, endValue]);
 
   return (
     <div ref={containerRef} className="flex flex-col items-center text-center">
       <div className="font-sans text-5xl sm:text-6xl lg:text-[68px] font-normal tracking-[-0.04em] text-white leading-none mb-3">
         {prefix}
-        {currentValue}
+        <span ref={valueRef}>0</span>
         {suffix}
       </div>
       <p className="text-white/80 text-xs sm:text-sm leading-snug font-normal max-w-[220px]">

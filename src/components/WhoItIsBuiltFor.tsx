@@ -25,8 +25,8 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
       description:
         t?.tabs.finance.desc ||
         'We engineer secure, compliant, and observable IT infrastructure that eliminates downtime, modernizes legacy bottlenecks, and protects data integrity.',
-      image:
-        'https://framerusercontent.com/images/HTHMXqJ1BOJIT1QD7yRnwyb2OU.jpg?width=1000&height=700',
+      image: '/assets/tabs/tab-1-1200.webp',
+      srcSet: '/assets/tabs/tab-1-600.webp 600w, /assets/tabs/tab-1-1200.webp 1200w',
       alt: 'Enterprise engineering team reviewing architecture',
     },
     {
@@ -36,8 +36,8 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
       description:
         t?.tabs.operations.desc ||
         'From specialized LLM integrations to high-throughput data processing pipelines, we take AI beyond proof-of-concept into reliable day-to-day operations.',
-      image:
-        'https://framerusercontent.com/images/5TuC8dag5g29D54MoXnUDLODdm4.jpg?width=1000&height=700',
+      image: '/assets/tabs/tab-2-1200.webp',
+      srcSet: '/assets/tabs/tab-2-600.webp 600w, /assets/tabs/tab-2-1200.webp 1200w',
       alt: 'Product team testing machine learning models',
     },
     {
@@ -47,8 +47,8 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
       description:
         t?.tabs.growing.desc ||
         'When rapid expansion challenges your software foundation, we deliver structured engineering that supports velocity without sacrificing system health.',
-      image:
-        'https://framerusercontent.com/images/OnT1fUCQdan90tc3Balfx9F7RI.jpg?width=1000&height=700',
+      image: '/assets/tabs/tab-3-1200.webp',
+      srcSet: '/assets/tabs/tab-3-600.webp 600w, /assets/tabs/tab-3-1200.webp 1200w',
       alt: 'Fast growing engineering team collaborating',
     },
     {
@@ -58,8 +58,8 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
       description:
         t?.tabs.founders.desc ||
         'We help ambitious technical leaders investigate complex questions, validate experimental prototypes, and turn research into production-grade reality.',
-      image:
-        'https://framerusercontent.com/images/5exrwTUKDpScrCcdckQ2bW20Q.jpg?width=1000&height=700',
+      image: '/assets/tabs/tab-4-1200.webp',
+      srcSet: '/assets/tabs/tab-4-600.webp 600w, /assets/tabs/tab-4-1200.webp 1200w',
       alt: 'R&D leaders exploring computational research',
     },
   ];
@@ -67,7 +67,7 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
   const currentTab = tabs[activeTab];
 
   return (
-    <section className="bg-[#0A0D14] text-white py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-t border-b border-white/10">
+    <section id="who-we-build-for" className="bg-[#0A0D14] text-white py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-t border-b border-white/10 scroll-mt-20">
       <div className="max-w-6xl mx-auto">
         {/* Section Heading */}
 
@@ -138,9 +138,12 @@ export const WhoItIsBuiltFor: React.FC<WhoProps> = ({ onOpenDemo, t }) => {
               <img
                 key={currentTab.id}
                 src={currentTab.image}
+                srcSet={currentTab.srcSet}
+                sizes="(max-width: 1024px) 100vw, 576px"
                 alt={currentTab.alt}
-                className="w-full h-full object-cover animate-in fade-in duration-300"
+                className="w-full h-full object-cover"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, Command } from 'lucide-react';
 import { validateDemoForm } from '../utils/calculator';
 import { RollButton } from './RollButton';
@@ -27,6 +27,27 @@ export const DemoModal: React.FC<DemoModalProps> = ({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSuccess, setIsSuccess] = useState(false);
+
+  // Close on Escape key and prevent background body scrolling while open
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsSuccess(false);
+        onClose();
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -70,9 +91,13 @@ export const DemoModal: React.FC<DemoModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
+      onClick={resetAndClose}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
     >
-      <div className="relative w-full max-w-lg bg-[#0E131F] border border-white/20 rounded-xl p-6 sm:p-8 text-white shadow-2xl">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-lg bg-[#0E131F] border border-white/20 rounded-xl p-6 sm:p-8 text-white shadow-2xl"
+      >
         {/* Close Button */}
         <button
           onClick={resetAndClose}
@@ -181,7 +206,7 @@ export const DemoModal: React.FC<DemoModalProps> = ({
                   rows={2}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="E.g., virtual cards, vendor payments, spend limits..."
+                  placeholder="E.g., custom AI model integration, scalable cloud migration, high-throughput pipelines..."
                   className="w-full px-3.5 py-2.5 bg-white/5 border border-white/15 rounded text-white text-sm focus:outline-none focus:border-[#FF3E24] resize-none"
                 />
               </div>

@@ -24,7 +24,7 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
       role="dialog"
       aria-modal="true"
       aria-label="Site Navigation"
-      className="fixed inset-0 z-40 bg-[#050B1E]/95 backdrop-blur-2xl text-white pt-28 pb-16 px-6 sm:px-10 lg:px-16 overflow-y-auto animate-in fade-in duration-300"
+      className="fixed inset-0 z-40 bg-[#050B1E] text-white pt-28 pb-16 px-6 sm:px-10 lg:px-16 overflow-y-auto"
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 pt-4">
         {/* Navigation Columns (5 cols) */}
@@ -94,7 +94,7 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               Legal
             </h4>
             <ul className="space-y-4">
-              {['Cookie Policy', 'Terms & Conditions', 'Privacy Policy', '404'].map((item) => (
+              {['Cookie Policy', 'Terms & Conditions', 'Privacy Policy', 'FAQ'].map((item) => (
                 <li key={item}>
                   <button
                     onClick={() => handleLinkClick(item)}
@@ -119,10 +119,15 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
           >
             <div className="relative aspect-[16/10] overflow-hidden rounded bg-[#10172D] mb-4 border border-white/10">
               <img
-                src="https://framerusercontent.com/images/mdmrUi06cr9lMzUxKfXbfWorg.png?width=3641&height=2048"
+                src="/assets/menu/menu-1-800.webp"
+                srcSet="/assets/menu/menu-1-400.webp 400w, /assets/menu/menu-1-800.webp 800w"
+                sizes="(max-width: 640px) 90vw, 350px"
+                width={800}
+                height={450}
                 alt="Engineering AI architectures for enterprise operations"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="flex items-start justify-between gap-4">
@@ -146,10 +151,15 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
           >
             <div className="relative aspect-[16/10] overflow-hidden rounded bg-[#10172D] mb-4 border border-white/10">
               <img
-                src="https://framerusercontent.com/images/xFUlLWSdna5etFgvfAD27DvvQ.jpg?width=6123&height=4082"
+                src="/assets/menu/menu-2-800.webp"
+                srcSet="/assets/menu/menu-2-400.webp 400w, /assets/menu/menu-2-800.webp 800w"
+                sizes="(max-width: 640px) 90vw, 350px"
+                width={800}
+                height={533}
                 alt="High-availability cloud systems beyond traditional infrastructure"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="flex items-start justify-between gap-4">

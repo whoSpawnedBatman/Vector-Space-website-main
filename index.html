@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,11 +9,13 @@
     <meta property="og:description" content="Vector Space Dynamics builds practical technology and AI solutions for complex problems—and keeps exploring what comes next." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&family=Michroma&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/webp" href="/assets/brand/vsd-symbol-primary-64.webp" />
+    <link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/michroma-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" as="image" href="/assets/hero-earth.webp" fetchpriority="high" />
   </head>
-  <body class="bg-[#050B1E] text-white antialiased selection:bg-[#ff3e24] selection:text-white font-['Geist',sans-serif]">
+  <body class="bg-[#050B1E] text-white antialiased selection:bg-[#ff3e24] selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

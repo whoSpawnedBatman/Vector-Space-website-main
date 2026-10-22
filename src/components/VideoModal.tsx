@@ -1,31 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Play, ExternalLink } from 'lucide-react';
 import { RollButton } from './RollButton';
+import { TranslationDictionary } from '../utils/i18n';
 
 interface VideoModalProps {
   isOpen: boolean;
   onClose: () => void;
+  t?: TranslationDictionary['modals']['video'];
 }
 
-export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose }) => {
+export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, t }) => {
   const [useIframe, setUseIframe] = useState(true);
 
+  // Close on Escape key and prevent background body scrolling while open
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
+
+  const tag = t?.tag || 'Vector Space — Technology Overview';
+  const watchButtonText = t?.watchOnYoutube || 'WATCH ON YOUTUBE';
 
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Vector Space Overview Video"
+      onClick={onClose}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-xl animate-in fade-in duration-200"
     >
-      <div className="relative w-full max-w-4xl bg-[#0B0F19] rounded-xl overflow-hidden border border-white/20 shadow-2xl">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-4xl bg-[#0B0F19] rounded-xl overflow-hidden border border-white/20 shadow-2xl"
+      >
         {/* Header bar */}
         <div className="flex items-center justify-between px-5 py-3.5 bg-[#0C101A] border-b border-white/10">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF3E24] inline-block animate-pulse" />
             <span className="font-mono text-xs text-white/90 uppercase tracking-wider">
-              Vector Space — Technology Overview
+              {tag}
             </span>
           </div>
 
@@ -77,7 +106,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose }) => {
                   rel="noopener noreferrer"
                 >
                   <RollButton variant="primary" size="md">
-                    WATCH ON YOUTUBE
+                    {watchButtonText}
                   </RollButton>
                 </a>
               </div>

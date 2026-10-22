@@ -24,8 +24,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, t }) => {
       {/* Top Sketches Banner on Warm Cream Background (Characters sitting on the grass edge) */}
       <div className="w-full bg-[#F9F9F7] pt-8 sm:pt-10 pb-0 flex items-end justify-center overflow-hidden">
         <img
-          src="/assets/sketch-banner.png"
+          src="/assets/brand/sketch-banner-1200.webp"
+          srcSet="/assets/brand/sketch-banner-600.webp 600w, /assets/brand/sketch-banner-1200.webp 1200w"
+          sizes="(max-width: 640px) 600px, 1200px"
+          width={1200}
+          height={109}
           alt="Vector Space Dynamics sketches banner"
+          loading="lazy"
+          decoding="async"
           className="h-16 sm:h-20 lg:h-24 w-auto object-contain max-w-full select-none pointer-events-none translate-y-[2px]"
         />
       </div>
@@ -33,12 +39,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, t }) => {
       {/* Main Footer with Light Streaks Background Photo */}
       <div className="relative overflow-hidden text-white flex flex-col justify-between min-h-[480px] lg:min-h-[520px] px-6 sm:px-12 lg:px-20 pt-12 sm:pt-16 pb-10 sm:pb-12">
         {/* Light Streaks Background Photo */}
-        <div
-          className="absolute inset-0 bg-cover bg-center pointer-events-none"
-          style={{
-            backgroundImage: `url('/assets/light-streaks.jpg')`,
-            backgroundPosition: 'center',
-          }}
+        <img
+          src="/assets/brand/light-streaks-1920.webp"
+          srcSet="/assets/brand/light-streaks-960.webp 960w, /assets/brand/light-streaks-1920.webp 1024w"
+          sizes="100vw"
+          width={1024}
+          height={683}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: 'center' }}
         />
 
         {/* Atmospheric Contrast Layer */}
@@ -136,9 +148,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, t }) => {
         {/* Bottom Attribution */}
         <div className="relative z-10 max-w-7xl mx-auto w-full pt-16 sm:pt-20 flex items-center justify-start">
           <a
-            href="https://x.com/clayxstudio"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-white/70 hover:text-white transition-colors drop-shadow"
           >
             {attribution.toUpperCase()}

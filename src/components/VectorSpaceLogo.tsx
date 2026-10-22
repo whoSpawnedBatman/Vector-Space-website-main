@@ -16,20 +16,20 @@ export const VectorSpaceSymbol: React.FC<{
   className?: string;
   variant?: 'white' | 'primary' | 'dark';
 }> = ({ size = 26, className = '', variant = 'white' }) => {
-  const src =
-    variant === 'primary'
-      ? '/assets/vsd-symbol-primary.png'
-      : variant === 'dark'
-      ? '/assets/vsd-symbol-dark.png'
-      : '/assets/vsd-symbol-white.png';
+  const key = variant === 'primary' ? 'primary' : variant === 'dark' ? 'dark' : 'white';
 
   return (
     <img
-      src={src}
+      src={`/assets/brand/vsd-symbol-${key}-128.webp`}
+      srcSet={`/assets/brand/vsd-symbol-${key}-64.webp 64w, /assets/brand/vsd-symbol-${key}-128.webp 128w`}
+      sizes={`${size}px`}
+      width={size}
+      height={size}
       alt="Vector Space Dynamics Symbol"
       style={{ height: `${size}px`, width: 'auto' }}
       className={`shrink-0 object-contain select-none pointer-events-none ${className}`}
       loading="eager"
+      decoding="async"
     />
   );
 };

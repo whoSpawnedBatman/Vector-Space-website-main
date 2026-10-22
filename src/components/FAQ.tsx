@@ -67,7 +67,7 @@ export const FAQ: React.FC<FAQProps> = ({ t }) => {
   const col2 = t?.col2 || defaultCol2;
 
   return (
-    <section className="bg-[#F9F9F7] text-[#111317] py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-b border-[#111317]/10">
+    <section id="faq" className="bg-[#F9F9F7] text-[#111317] py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-b border-[#111317]/10 scroll-mt-20">
       <div className="max-w-6xl mx-auto">
         {/* Left-Aligned Header */}
 

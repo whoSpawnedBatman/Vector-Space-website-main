@@ -18,23 +18,23 @@ test('i18n supports both English (en) and Spanish (es)', () => {
 test('getTranslations returns English translation keys correctly', () => {
   const t = getTranslations('en');
   assert.equal(t.navbar.menu, 'MENU');
-  assert.equal(t.hero.title, 'Move payments without friction');
-  assert.equal(t.hero.seeInAction, 'SEE IN ACTION');
-  assert.equal(t.hero.requestDemo, 'REQUEST A DEMO');
+  assert.equal(t.hero.title, 'Practical technology solutions today. Ambitious questions for tomorrow.');
+  assert.equal(t.hero.seeInAction, 'EXPLORE SOLUTIONS');
+  assert.equal(t.hero.requestDemo, 'SCHEDULE CONSULTATION');
 });
 
 test('getTranslations returns Spanish translation keys correctly', () => {
   const t = getTranslations('es');
   assert.equal(t.navbar.menu, 'MENÚ');
-  assert.equal(t.hero.title, 'Mueve pagos sin fricción');
-  assert.equal(t.hero.seeInAction, 'VER EN ACCIÓN');
-  assert.equal(t.hero.requestDemo, 'SOLICITAR DEMO');
+  assert.equal(t.hero.title, 'Soluciones tecnológicas prácticas hoy. Preguntas ambiciosas para el mañana.');
+  assert.equal(t.hero.seeInAction, 'EXPLORAR SOLUCIONES');
+  assert.equal(t.hero.requestDemo, 'AGENDAR CONSULTA');
   assert.equal(t.navbar.spanish, 'Español');
 });
 
 test('getTranslations falls back to English when unknown language passed', () => {
   const t = getTranslations('fr' as Language);
-  assert.equal(t.hero.title, 'Move payments without friction');
+  assert.equal(t.hero.title, 'Practical technology solutions today. Ambitious questions for tomorrow.');
 });
 
 test('getLanguageOption returns expected metadata for en and es', () => {

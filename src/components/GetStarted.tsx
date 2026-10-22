@@ -38,12 +38,18 @@ export const GetStarted: React.FC<GetStartedProps> = ({ onSuccessDemo, t }) => {
   return (
     <section className="relative py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden text-white flex flex-col justify-center items-center min-h-[480px] sm:min-h-[540px]">
       {/* Cinematic Motion-Blurred Running Man Background Photo */}
-      <div
-        className="absolute inset-0 bg-cover bg-center pointer-events-none"
-        style={{
-          backgroundImage: `url('/assets/running-man.jpg')`,
-          backgroundPosition: 'center 40%',
-        }}
+      <img
+        src="/assets/brand/running-man-1920.webp"
+        srcSet="/assets/brand/running-man-960.webp 960w, /assets/brand/running-man-1920.webp 1920w"
+        sizes="100vw"
+        width={1920}
+        height={1280}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        style={{ objectPosition: 'center 40%' }}
       />
       {/* Subtle darkening overlay so text is crisp while preserving sunset photo vibrancy */}
       <div className="absolute inset-0 bg-black/25 pointer-events-none" />
