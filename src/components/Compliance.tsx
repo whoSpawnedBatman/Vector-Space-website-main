@@ -6,71 +6,64 @@ interface ComplianceProps {
 }
 
 export const Compliance: React.FC<ComplianceProps> = ({ t }) => {
-  const tag = t?.tag || 'CERTIFIED & COMPLIANT';
+  const tag = t?.tag || 'THE FOUR BRAND PRINCIPLES';
   const summary =
     t?.summary ||
-    'Ballance gives teams clear control over how money moves across cards and accounts, making spending visible in real time so decisions stay confident and informed.';
+    'Every line of code and architecture we deliver is governed by our four foundational pillars: clear thinking, curiosity, continuous iteration, and disciplined exploration.';
 
   const defaultCertifications = [
     {
-      title: 'SOC II',
-      description:
-        'Our SOC certification confirms that our systems and controls meet strict standards for security, availability, and confidentiality, in operational structures.',
+      title: 'Precision',
+      desc: 'We value clear thinking, sound engineering, rigour and meticulous attention to detail in every system.',
     },
     {
-      title: 'ISO 27001',
-      description:
-        'Certified to ISO 27001, our security practices follow recognised standards for protecting information, and maintaining strong controls.',
+      title: 'Curiosity',
+      desc: 'We question assumptions, investigate complex problems deeply, and keep learning relentlessly.',
     },
     {
-      title: 'GDPR',
-      description:
-        'Personal data is processed in line with GDPR requirements, with clear controls in place to support privacy, and transparency across our systems.',
+      title: 'Progress',
+      desc: 'We build practical solutions, test ideas through rigorous validation, and improve through continuous iteration.',
     },
     {
-      title: 'HIPAA',
-      description:
-        'Our processes are designed to support HIPAA requirements, ensuring sensitive information is handled securely, in accordance with expectations.',
+      title: 'Exploration',
+      desc: 'We pursue ambitious questions with discipline and an open mind toward the future of technology and space.',
     },
   ];
 
-  const certifications = t?.items
-    ? t.items.map((i) => ({ title: i.title, description: i.desc }))
-    : defaultCertifications;
+  const items = t?.items || defaultCertifications;
 
   return (
     <section className="bg-[#0A0D14] text-white py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-b border-white/10">
       <div className="max-w-6xl mx-auto">
-        {/* Category Tag */}
-        <div className="flex justify-center mb-16">
-          <span className="font-mono text-xs uppercase tracking-widest text-white/50 flex items-center gap-2">
-            <span className="w-2 h-2 border border-white/40 inline-block" />
-            {tag}
-          </span>
-        </div>
-
-        {/* 4 Compliance Cards Grid */}
+        {/* 4 Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {certifications.map((item, idx) => (
+          {items.map((item, idx) => (
             <div
               key={idx}
-              className="bg-[#10131B] border border-white/10 rounded-sm p-7 flex flex-col justify-between hover:border-white/25 transition-colors"
+              className="group bg-[#10131B] border border-white/10 rounded-sm p-7 sm:p-8 flex flex-col justify-between min-h-[260px] sm:min-h-[280px] hover:border-white/25 transition-all duration-200"
             >
               <div>
-                <h3 className="font-mono text-base font-medium tracking-wider text-white mb-4">
+                <h3 className="font-mono text-base font-semibold tracking-wider text-white mb-4">
                   {item.title}
                 </h3>
-                <p className="text-white/60 text-xs sm:text-[13px] leading-relaxed">
-                  {item.description}
+                <p className="text-white/60 text-xs sm:text-[13px] leading-relaxed font-normal">
+                  {item.desc || (item as any).description}
                 </p>
+              </div>
+
+              {/* Minimal Index Number at bottom of card */}
+              <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-between">
+                <span className="font-mono text-xs text-white/30 tracking-widest group-hover:text-[#FF3E24] transition-colors">
+                  0{idx + 1}
+                </span>
               </div>
             </div>
           ))}
         </div>
 
         {/* Summary Footer Text */}
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-base sm:text-lg font-normal text-white/80 leading-relaxed">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-sm sm:text-base font-normal text-white/70 leading-relaxed">
             {summary}
           </p>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BallanceLogo } from './BallanceLogo';
+import { VectorSpaceLogo } from './VectorSpaceLogo';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { Command } from 'lucide-react';
 import { Language } from '../utils/i18n';
@@ -27,7 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 px-6 sm:px-10 lg:px-12 py-5 sm:py-6 flex items-center justify-between pointer-events-none">
       {/* Left Header Logo */}
       <div className="pointer-events-auto">
-        <BallanceLogo textColor="text-white" size={26} />
+        <VectorSpaceLogo textColor="text-white" size={26} nameVariant="short" />
       </div>
 
       {/* Right Header Navigation Controls: Language Switcher + Menu Button */}

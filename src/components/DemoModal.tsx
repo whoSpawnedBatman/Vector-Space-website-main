@@ -30,19 +30,19 @@ export const DemoModal: React.FC<DemoModalProps> = ({
 
   if (!isOpen) return null;
 
-  const tag = t?.tag || 'Vector Space Demonstration';
-  const title = t?.title || 'Request a Guided Demo';
+  const tag = t?.tag || 'Vector Space · Consultation';
+  const title = t?.title || 'Schedule a Technical Discovery';
   const subtitle =
     t?.subtitle ||
-    'Discover how Vector Space streamlines card issuance, expense approvals, and real-time payment oversight.';
+    'Connect directly with our engineering team to explore custom AI integrations, software architecture, or cloud infrastructure solutions.';
   const nameLabel = t?.nameLabel || 'Full Name *';
   const emailLabel = t?.emailLabel || 'Work Email *';
-  const companyLabel = t?.companyLabel || 'Company';
+  const companyLabel = t?.companyLabel || 'Company / Organization';
   const teamSizeLabel = t?.teamSizeLabel || 'Team Size';
-  const goalLabel = t?.goalLabel || 'Primary Goal (Optional)';
-  const submitBtn = t?.submitBtn || 'SCHEDULE DEMO';
-  const successTitle = t?.successTitle || 'Demo Scheduled!';
-  const returnBtn = t?.returnBtn || 'RETURN TO SITE';
+  const goalLabel = t?.goalLabel || 'Tell us about your technical challenge (Optional)';
+  const submitBtn = t?.submitBtn || 'REQUEST CONSULTATION';
+  const successTitle = t?.successTitle || 'Consultation Requested!';
+  const returnBtn = t?.returnBtn || 'BACK TO WEBSITE';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

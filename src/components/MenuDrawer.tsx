@@ -35,7 +35,7 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               Platform
             </h4>
             <ul className="space-y-4">
-              {['Ballance* Home', 'Company', 'Pricing', 'Contact'].map((item) => (
+              {['Vector Space', 'Capabilities', 'Principles', 'Contact Us'].map((item) => (
                 <li key={item}>
                   <button
                     onClick={() => handleLinkClick(item)}
@@ -114,55 +114,39 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
         <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Card 1 */}
           <div
-            onClick={() => handleLinkClick('Designing cards that people actually use')}
-            className="group cursor-pointer flex flex-col"
+            onClick={() => handleLinkClick('Engineering AI architectures for enterprise operations')}
+            className="group cursor-pointer flex flex-col justify-between p-6 rounded bg-[#10172D]/60 border border-white/10 hover:border-white/25 hover:bg-[#10172D] transition-all min-h-[160px]"
           >
-            <div className="relative aspect-[16/10] overflow-hidden rounded bg-[#10172D] mb-4 border border-white/10">
-              <img
-                src="https://framerusercontent.com/images/mdmrUi06cr9lMzUxKfXbfWorg.png?width=3641&height=2048"
-                alt="Designing cards that people actually use"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
             <div className="flex items-start justify-between gap-4">
-              <h3 className="text-lg font-medium tracking-tight text-white/95 group-hover:text-white transition-colors leading-snug">
-                Designing cards that people actually use
+              <h3 className="text-base sm:text-lg font-medium tracking-tight text-white/95 group-hover:text-white transition-colors leading-snug">
+                Engineering AI architectures for enterprise operations
               </h3>
               <ArrowUpRight
                 size={18}
                 className="text-white/60 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1"
               />
             </div>
-            <span className="font-mono text-xs text-white/40 tracking-wider uppercase mt-2">
-              PRODUCT
+            <span className="font-mono text-[11px] text-[#FF3E24] tracking-wider uppercase mt-4">
+              ARTIFICIAL INTELLIGENCE
             </span>
           </div>
 
           {/* Card 2 */}
           <div
-            onClick={() => handleLinkClick('Reducing friction in business spending')}
-            className="group cursor-pointer flex flex-col"
+            onClick={() => handleLinkClick('High-availability cloud systems beyond traditional infrastructure')}
+            className="group cursor-pointer flex flex-col justify-between p-6 rounded bg-[#10172D]/60 border border-white/10 hover:border-white/25 hover:bg-[#10172D] transition-all min-h-[160px]"
           >
-            <div className="relative aspect-[16/10] overflow-hidden rounded bg-[#10172D] mb-4 border border-white/10">
-              <img
-                src="https://framerusercontent.com/images/xFUlLWSdna5etFgvfAD27DvvQ.jpg?width=6123&height=4082"
-                alt="Reducing friction in business spending"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
             <div className="flex items-start justify-between gap-4">
-              <h3 className="text-lg font-medium tracking-tight text-white/95 group-hover:text-white transition-colors leading-snug">
-                Reducing friction in business spending
+              <h3 className="text-base sm:text-lg font-medium tracking-tight text-white/95 group-hover:text-white transition-colors leading-snug">
+                High-availability cloud systems beyond traditional infrastructure
               </h3>
               <ArrowUpRight
                 size={18}
                 className="text-white/60 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1"
               />
             </div>
-            <span className="font-mono text-xs text-white/40 tracking-wider uppercase mt-2">
-              OPERATIONS
+            <span className="font-mono text-[11px] text-[#FF3E24] tracking-wider uppercase mt-4">
+              SYSTEMS ARCHITECTURE
             </span>
           </div>
         </div>

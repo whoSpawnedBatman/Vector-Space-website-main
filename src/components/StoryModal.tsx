@@ -61,7 +61,7 @@ export const StoryModal: React.FC<StoryModalProps> = ({
           </div>
 
           <p className="text-white/70 text-sm sm:text-base leading-relaxed">
-            By consolidating multi-entity spending, corporate cards, and vendor subscriptions into Ballance, teams eliminate reconciliation delays and prevent surprise budget overruns. Real-time controls empower employees while keeping finance leaders confident.
+            Vector Space builds practical technology solutions for complex problems—combining sound software engineering, scalable cloud infrastructure, and purposeful AI.
           </p>
 
           <div className="pt-4 flex flex-wrap items-center justify-between gap-4">
@@ -74,7 +74,7 @@ export const StoryModal: React.FC<StoryModalProps> = ({
                 onOpenDemo();
               }}
             >
-              REQUEST A SIMILAR DEMO
+              SCHEDULE A CONSULTATION
             </RollButton>
 
             <button

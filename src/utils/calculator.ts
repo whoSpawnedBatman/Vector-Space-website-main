@@ -1,5 +1,5 @@
 /**
- * Utilities for Ballance calculations, validations, and animations
+ * Utilities for Vector Space Dynamics calculations, validations, and animations
  */
 
 export interface DemoFormValues {

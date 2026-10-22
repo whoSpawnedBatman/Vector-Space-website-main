@@ -1,5 +1,5 @@
 import React from 'react';
-import { BallanceLogo, BallanceAsterisk } from './BallanceLogo';
+import { VectorSpaceLogo } from './VectorSpaceLogo';
 import { TranslationDictionary } from '../utils/i18n';
 
 interface FooterProps {
@@ -12,129 +12,117 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, t }) => {
     if (onNavigate) onNavigate(item);
   };
 
-  const slogan = t?.slogan || 'Governance, everywhere you spend.';
-  const platform = t?.platform || 'Platform';
-  const resources = t?.resources || 'Resources';
-  const legal = t?.legal || 'Legal';
+  const slogan = t?.slogan || 'Engineering\nbeyond boundaries.';
+  const platform = t?.platform || 'CAPABILITIES';
+  const resources = t?.resources || 'ORGANIZATION';
+  const legal = t?.legal || 'STANDARDS';
   const hiringBadge = t?.hiringBadge || 'WE ARE HIRING!';
-  const attribution = t?.attribution || 'made with 🍄 by clay studio.';
-  const copyright = t?.copyright || '© 2026 Vector Space Technologies, Inc.';
+  const attribution = t?.attribution || 'VECTOR SPACE DYNAMICS';
 
   return (
-    <footer className="relative min-h-[520px] overflow-hidden text-white flex flex-col justify-between p-8 sm:p-12 lg:p-16">
-      {/* Apples in Basket Background Image with Balanced Darkening */}
-      <div
-        className="absolute inset-0 bg-cover bg-center -z-10"
-        style={{
-          backgroundImage: `url('https://framerusercontent.com/images/LO6cf7PuUSbAsswhNPsu0IvAM.jpg?width=4000&height=3000')`,
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/75 backdrop-contrast-110" />
-      </div>
+    <footer className="w-full flex flex-col border-t border-white/10">
+      {/* Main Footer */}
+      <div className="relative overflow-hidden text-white flex flex-col justify-between min-h-[440px] lg:min-h-[480px] px-6 sm:px-12 lg:px-20 pt-16 sm:pt-20 pb-10 sm:pb-12 bg-[#06080F]">
 
-      {/* Top Footer Content */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 pt-4">
-        {/* Brand Column */}
-        <div className="md:col-span-5 flex flex-col justify-start">
-          <BallanceLogo size={24} textColor="text-white" />
-          <h3 className="mt-8 text-2xl sm:text-3xl font-normal tracking-tight text-white max-w-xs leading-snug drop-shadow-md">
-            {slogan}
-          </h3>
-        </div>
 
-        {/* Links Columns */}
-        <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
-          {/* Platform */}
-          <div>
-            <h4 className="font-mono text-xs uppercase tracking-wider text-white/60 mb-4">
-              {platform}
-            </h4>
-            <ul className="space-y-3">
-              {['Ballance* Home', 'Company', 'Pricing', 'Contact Us', '404'].map((link) => (
-                <li key={link}>
+        {/* Top Footer Content */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-16">
+          {/* Brand Column */}
+          <div className="flex flex-col items-start max-w-xs pt-1 sm:pt-2">
+            <VectorSpaceLogo size={24} textColor="text-white" nameVariant="full" />
+            <h3 className="mt-5 text-xl sm:text-2xl lg:text-[26px] font-normal tracking-[-0.02em] text-white leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] whitespace-pre-line">
+              {slogan}
+            </h3>
+          </div>
+
+          {/* Right Frosted Glass Navigation Box */}
+          <div className="w-full lg:w-auto bg-black/45 backdrop-blur-md border border-white/10 rounded-[4px] grid grid-cols-1 sm:grid-cols-3 overflow-hidden shadow-2xl">
+            {/* Platform Column */}
+            <div className="p-6 sm:px-8 sm:py-7 border-b sm:border-b-0 sm:border-r border-white/10 flex flex-col min-w-[170px]">
+              <h4 className="font-mono text-[11px] font-bold uppercase tracking-widest text-white mb-5">
+                {platform}
+              </h4>
+              <ul className="space-y-3.5">
+                {['Vector Space', 'Capabilities', 'Principles', 'Contact Us'].map((link) => (
+                  <li key={link}>
+                    <button
+                      onClick={() => handleNav(link)}
+                      className="text-[13px] text-white/75 hover:text-white transition-colors cursor-pointer text-left font-normal"
+                    >
+                      {link}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Resources Column */}
+            <div className="p-6 sm:px-8 sm:py-7 border-b sm:border-b-0 sm:border-r border-white/10 flex flex-col min-w-[190px]">
+              <h4 className="font-mono text-[11px] font-bold uppercase tracking-widest text-white mb-5">
+                {resources}
+              </h4>
+              <ul className="space-y-3.5">
+                <li>
                   <button
-                    onClick={() => handleNav(link)}
-                    className="text-sm text-white/85 hover:text-white transition-colors cursor-pointer text-left drop-shadow-sm"
+                    onClick={() => handleNav('Blog')}
+                    className="text-[13px] text-white/75 hover:text-white transition-colors cursor-pointer text-left font-normal"
                   >
-                    {link}
+                    Blog
                   </button>
                 </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h4 className="font-mono text-xs uppercase tracking-wider text-white/60 mb-4">
-              {resources}
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <button
-                  onClick={() => handleNav('Blog')}
-                  className="text-sm text-white/85 hover:text-white transition-colors cursor-pointer drop-shadow-sm"
-                >
-                  Blog
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('Customer Stories')}
-                  className="text-sm text-white/85 hover:text-white transition-colors cursor-pointer drop-shadow-sm"
-                >
-                  Customer Stories
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('Careers')}
-                  className="text-sm text-white/85 hover:text-white transition-colors cursor-pointer flex flex-col sm:flex-row sm:items-center gap-1.5 drop-shadow-sm"
-                >
-                  <span>Careers</span>
-                  <span className="font-mono text-[9px] uppercase tracking-wider px-1 py-0.5 rounded bg-white/20 text-white font-medium">
-                    {hiringBadge}
-                  </span>
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h4 className="font-mono text-xs uppercase tracking-wider text-white/60 mb-4">
-              {legal}
-            </h4>
-            <ul className="space-y-3">
-              {['Terms', 'Privacy Policy', 'Cookies'].map((link) => (
-                <li key={link}>
+                <li>
                   <button
-                    onClick={() => handleNav(link)}
-                    className="text-sm text-white/85 hover:text-white transition-colors cursor-pointer drop-shadow-sm"
+                    onClick={() => handleNav('Customer Stories')}
+                    className="text-[13px] text-white/75 hover:text-white transition-colors cursor-pointer text-left font-normal"
                   >
-                    {link}
+                    Customer Stories
                   </button>
                 </li>
-              ))}
-            </ul>
+                <li>
+                  <button
+                    onClick={() => handleNav('Careers')}
+                    className="text-[13px] text-white/75 hover:text-white transition-colors cursor-pointer inline-flex items-center gap-2 text-left font-normal"
+                  >
+                    <span>Careers</span>
+                    <span className="font-mono text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-[2px] bg-white/15 border border-white/10 text-white/90 font-medium">
+                      {hiringBadge}
+                    </span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Legal Column */}
+            <div className="p-6 sm:px-8 sm:py-7 flex flex-col min-w-[160px]">
+              <h4 className="font-mono text-[11px] font-bold uppercase tracking-widest text-white mb-5">
+                {legal}
+              </h4>
+              <ul className="space-y-3.5">
+                {['Terms', 'Privacy Policy', 'Cookies'].map((link) => (
+                  <li key={link}>
+                    <button
+                      onClick={() => handleNav(link)}
+                      className="text-[13px] text-white/75 hover:text-white transition-colors cursor-pointer text-left font-normal"
+                    >
+                      {link}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Footer Attribution */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full pt-16 mt-12 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/70">
-        <a
-          href="https://x.com/clayxstudio"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-white transition-colors flex items-center gap-1.5"
-        >
-          <span>{attribution}</span>
-        </a>
-
-        {/* Decorative spinning asterisk */}
-        <div className="flex items-center gap-2">
-          <BallanceAsterisk size={14} className="text-white/50 animate-spin [animation-duration:12s]" />
-          <span>{copyright}</span>
+        {/* Bottom Attribution */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full pt-16 sm:pt-20 flex items-center justify-start">
+          <a
+            href="https://x.com/clayxstudio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-white/70 hover:text-white transition-colors drop-shadow"
+          >
+            {attribution.toUpperCase()}
+          </a>
         </div>
       </div>
     </footer>

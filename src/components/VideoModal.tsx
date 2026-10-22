@@ -16,7 +16,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose }) => {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Ballance Product Demo Video"
+      aria-label="Vector Space Overview Video"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-xl animate-in fade-in duration-200"
     >
       <div className="relative w-full max-w-4xl bg-[#0B0F19] rounded-xl overflow-hidden border border-white/20 shadow-2xl">
@@ -25,7 +25,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose }) => {
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF3E24] inline-block animate-pulse" />
             <span className="font-mono text-xs text-white/90 uppercase tracking-wider">
-              Ballance — Live Product Walkthrough
+              Vector Space — Technology Overview
             </span>
           </div>
 
@@ -55,7 +55,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose }) => {
           {useIframe ? (
             <iframe
               src="https://www.youtube-nocookie.com/embed/OnEzp8K7fjU?autoplay=1&rel=0"
-              title="Ballance Demonstration"
+              title="Vector Space Demonstration"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               onError={() => setUseIframe(false)}
@@ -66,9 +66,9 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose }) => {
               <div className="w-16 h-16 rounded-full bg-[#FF3E24]/20 border border-[#FF3E24]/30 flex items-center justify-center mx-auto text-[#FF3E24]">
                 <Play size={28} className="translate-x-0.5" />
               </div>
-              <h3 className="text-xl font-normal text-white">Ballance Product Overview</h3>
+              <h3 className="text-xl font-normal text-white">Vector Space Overview</h3>
               <p className="text-sm text-white/60 max-w-md mx-auto">
-                Watch how fast-growing companies and finance leaders use Ballance to issue cards, automate expense policies, and track operations in real time.
+                Discover how Vector Space builds scalable software architecture, enterprise cloud systems, and applied artificial intelligence for complex operations.
               </p>
               <div className="pt-2">
                 <a

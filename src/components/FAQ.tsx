@@ -19,47 +19,47 @@ export const FAQ: React.FC<FAQProps> = ({ t }) => {
     }));
   };
 
-  const tag = t?.tag || 'QUESTIONS + ANSWERS';
-  const title = t?.title || 'Frequent Questions.';
+  const tag = t?.tag || 'QUESTIONS & CLARITY';
+  const title = t?.title || 'Frequently Asked Questions.';
   const subtitle =
     t?.subtitle ||
-    'Common answers to help you understand how Ballance works, what to expect, and how teams use it to manage spending with clarity and confidence.';
+    'Clear answers about our technology stack, engagement model, AI capabilities, and long-term vision.';
 
   const defaultCol1 = [
     {
-      q: 'What is Ballance?',
-      a: 'Ballance is a payments platform that helps individuals and businesses manage spending with simple cards, clear controls, and real-time visibility.',
+      q: 'What does Vector Space do today?',
+      a: 'We are a technology-driven organisation delivering practical IT solutions, custom software architecture, cloud engineering, and applied artificial intelligence for businesses solving complex problems.',
     },
     {
-      q: 'What types of cards does Ballance offer?',
-      a: 'Ballance provides easy-to-use cards suitable for everyday purchases, subscriptions, and business expenses.',
+      q: 'What is your approach to AI development?',
+      a: 'We focus on intelligent solutions grounded in reality. Rather than generic wrappers, we design domain-specific models, deterministic retrieval pipelines, and robust evaluation systems.',
     },
     {
-      q: 'How quickly can cards be issued?',
-      a: 'Cards can be created and assigned within minutes, allowing teams to get started without delays.',
+      q: 'How does VSD work with client teams?',
+      a: 'We partner directly with technical leaders and stakeholders to diagnose core bottlenecks, architect modular solutions, and execute with disciplined engineering standards.',
     },
     {
-      q: 'Can I control how cards are used?',
-      a: 'Yes. Spending rules and limits can be set upfront to keep usage clear and consistent.',
+      q: 'Can you modernize existing legacy systems?',
+      a: 'Yes. We specialize in non-destructive incremental refactoring, API abstraction layers, and cloud migrations designed to maintain business continuity throughout.',
     },
   ];
 
   const defaultCol2 = [
     {
-      q: 'What is a corporate card?',
-      a: 'A corporate card is a payment card issued to employees or teams for business-related expenses, allowing organisations to manage spending centrally rather than relying on personal cards and reimbursements.',
+      q: 'What is VSD’s long-term vision in space & scientific research?',
+      a: 'While our current business focuses on high-impact enterprise IT and AI solutions, our long-term roadmap expands into autonomous navigation systems, orbital computation, and scientific exploration.',
     },
     {
-      q: 'Why switch to a corporate card?',
-      a: 'Corporate cards simplify expense management by providing clearer visibility, faster payments, and more control over how company funds are used.',
+      q: 'What industries do you currently serve?',
+      a: 'We work across enterprise software, data-intensive logistics, finance infrastructure, health data systems, and emerging technology ventures.',
     },
     {
-      q: 'How can I get a corporate card with Ballance?',
-      a: 'You can apply through Ballance by setting up an account and completing a short onboarding process. Once approved, cards can be issued to individuals or teams quickly.',
+      q: 'What technology stacks and cloud providers do you support?',
+      a: 'We build platform-agnostic architectures across AWS, GCP, Azure, and on-premises environments, emphasizing modern typed languages, containerization, and automated CI/CD.',
     },
     {
-      q: 'Does Ballance support teams?',
-      a: 'Ballance is designed to scale, supporting multiple users, roles, and levels of access.',
+      q: 'How do we start a collaboration or project?',
+      a: 'Reach out through our consultation form. We will schedule a technical discovery session to understand your architecture, goals, and delivery timeline.',
     },
   ];
 
@@ -69,47 +69,38 @@ export const FAQ: React.FC<FAQProps> = ({ t }) => {
   return (
     <section className="bg-[#F9F9F7] text-[#111317] py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-b border-[#111317]/10">
       <div className="max-w-6xl mx-auto">
-        {/* Category Tag */}
-        <div className="flex justify-center mb-6">
-          <span className="font-mono text-xs uppercase tracking-widest text-[#111317]/60 flex items-center gap-2">
-            <span className="w-2 h-2 border border-[#111317]/50 inline-block" />
-            {tag}
-          </span>
-        </div>
+        {/* Left-Aligned Header */}
 
-        {/* Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Left-Aligned Header */}
+        <div className="text-left max-w-2xl mb-14 sm:mb-16">
           <h2 className="text-3xl sm:text-5xl font-normal tracking-[-0.03em] text-[#111317] leading-tight">
             {title}
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-[#111317]/70 font-normal leading-relaxed">
+          <p className="mt-4 text-sm sm:text-base text-[#111317]/70 font-normal leading-relaxed">
             {subtitle}
           </p>
         </div>
 
-        {/* 2 Columns of Accordions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-start">
+        {/* 2 Columns of Minimalist Bordered Accordions (Exact match to screenshot) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 items-start">
           {/* Column 1 */}
-          <div className="space-y-4">
+          <div>
             {col1.map((item, idx) => {
               const key = `col1-${idx}`;
               const isOpen = !!openIndices[key];
               return (
-                <div
-                  key={key}
-                  className="bg-white border border-[#111317]/10 rounded-sm overflow-hidden transition-all duration-200"
-                >
+                <div key={key} className="border-b border-[#111317]/15">
                   <button
                     onClick={() => toggleItem(key)}
                     aria-expanded={isOpen}
-                    className="w-full text-left p-6 flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50/50 transition-colors"
+                    className="w-full text-left py-5 sm:py-6 flex items-center justify-between gap-4 cursor-pointer hover:opacity-80 transition-opacity"
                   >
-                    <span className="font-sans text-base sm:text-lg font-medium text-[#111317]">
+                    <span className="font-sans text-base sm:text-[17px] font-normal text-[#111317]">
                       {item.q}
                     </span>
-                    <span className="shrink-0 w-8 h-8 rounded-full bg-[#F0EFE9] flex items-center justify-center text-[#111317]/60">
+                    <span className="shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-[3px] border border-[#111317]/20 flex items-center justify-center text-[#111317]/60 hover:border-[#111317]/40 transition-colors">
                       <ChevronDown
-                        size={16}
+                        size={14}
                         className={`transition-transform duration-300 ${
                           isOpen ? 'rotate-180 text-[#FF3E24]' : ''
                         }`}
@@ -118,7 +109,7 @@ export const FAQ: React.FC<FAQProps> = ({ t }) => {
                   </button>
 
                   {isOpen && (
-                    <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-[#111317]/70 leading-relaxed border-t border-[#111317]/5 animate-in fade-in duration-200">
+                    <div className="pb-6 text-sm sm:text-base text-[#111317]/70 leading-relaxed font-normal animate-in fade-in duration-200">
                       {item.a}
                     </div>
                   )}
@@ -128,26 +119,23 @@ export const FAQ: React.FC<FAQProps> = ({ t }) => {
           </div>
 
           {/* Column 2 */}
-          <div className="space-y-4">
+          <div>
             {col2.map((item, idx) => {
               const key = `col2-${idx}`;
               const isOpen = !!openIndices[key];
               return (
-                <div
-                  key={key}
-                  className="bg-white border border-[#111317]/10 rounded-sm overflow-hidden transition-all duration-200"
-                >
+                <div key={key} className="border-b border-[#111317]/15">
                   <button
                     onClick={() => toggleItem(key)}
                     aria-expanded={isOpen}
-                    className="w-full text-left p-6 flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50/50 transition-colors"
+                    className="w-full text-left py-5 sm:py-6 flex items-center justify-between gap-4 cursor-pointer hover:opacity-80 transition-opacity"
                   >
-                    <span className="font-sans text-base sm:text-lg font-medium text-[#111317]">
+                    <span className="font-sans text-base sm:text-[17px] font-normal text-[#111317]">
                       {item.q}
                     </span>
-                    <span className="shrink-0 w-8 h-8 rounded-full bg-[#F0EFE9] flex items-center justify-center text-[#111317]/60">
+                    <span className="shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-[3px] border border-[#111317]/20 flex items-center justify-center text-[#111317]/60 hover:border-[#111317]/40 transition-colors">
                       <ChevronDown
-                        size={16}
+                        size={14}
                         className={`transition-transform duration-300 ${
                           isOpen ? 'rotate-180 text-[#FF3E24]' : ''
                         }`}
@@ -156,7 +144,7 @@ export const FAQ: React.FC<FAQProps> = ({ t }) => {
                   </button>
 
                   {isOpen && (
-                    <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-[#111317]/70 leading-relaxed border-t border-[#111317]/5 animate-in fade-in duration-200">
+                    <div className="pb-6 text-sm sm:text-base text-[#111317]/70 leading-relaxed font-normal animate-in fade-in duration-200">
                       {item.a}
                     </div>
                   )}

@@ -4,10 +4,11 @@
  */
 
 import { useState, useEffect } from 'react';
+import Lenis from 'lenis';
 import { Navbar } from './components/Navbar';
 import { MenuDrawer } from './components/MenuDrawer';
 import { Hero } from './components/Hero';
-import { WhatBallanceDoes } from './components/WhatBallanceDoes';
+import { WhatVectorSpaceDoes } from './components/WhatVectorSpaceDoes';
 import { WhoItIsBuiltFor } from './components/WhoItIsBuiltFor';
 import { CustomerStories } from './components/CustomerStories';
 import { Compliance } from './components/Compliance';
@@ -26,6 +27,33 @@ export default function App() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [selectedStoryTitle, setSelectedStoryTitle] = useState<string | null>(null);
   const [demoInitialEmail, setDemoInitialEmail] = useState('');
+
+  // Lenis smooth scroll
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 0.9,              // snappier feel
+      easing: (t) => 1 - Math.pow(1 - t, 4),  // quartic ease-out: fast start, smooth end
+      smoothWheel: true,
+      wheelMultiplier: 1.1,       // slightly amplified wheel for responsiveness
+      touchMultiplier: 1.5,       // snappier on touch/trackpad
+    });
+
+    (window as any).__lenis = lenis;
+    window.dispatchEvent(new CustomEvent('lenis-ready', { detail: lenis }));
+
+    let rafHandle: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafHandle = requestAnimationFrame(raf);
+    }
+    rafHandle = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafHandle);
+      lenis.destroy();
+      delete (window as any).__lenis;
+    };
+  }, []);
 
   // Update HTML lang attribute whenever language changes
   useEffect(() => {
@@ -91,10 +119,10 @@ export default function App() {
           statsT={t.stats}
         />
 
-        {/* Section 2: What Ballance* Does (Hand-drawn sketch cards) */}
-        <WhatBallanceDoes t={t.whatDoes} />
+        {/* Section 2: What Vector Space Does (Hand-drawn sketch cards) */}
+        <WhatVectorSpaceDoes t={t.whatDoes} />
 
-        {/* Section 3: Who Ballance Is Built For (Interactive 4-tab switcher) */}
+        {/* Section 3: Who Vector Space Is Built For (Interactive 4-tab switcher) */}
         <WhoItIsBuiltFor onOpenDemo={() => handleOpenDemo()} t={t.whoFor} />
 
         {/* Section 4: Customer Feedback & Testimonials (Interactive metrics carousel) */}
@@ -109,14 +137,14 @@ export default function App() {
         {/* Section 6: Frequent Questions (2-column interactive accordion) */}
         <FAQ t={t.faq} />
 
-        {/* Section 7: Get Started With Ballance* (Brushed metallic banner & email form) */}
+        {/* Section 7: Get Started With Vector Space (Brushed metallic banner & email form) */}
         <GetStarted
           onSuccessDemo={(email) => handleOpenDemo(email)}
           t={t.getStarted}
         />
       </main>
 
-      {/* Footer with Apples on Grass background photo */}
+      {/* Footer with Light Streaks background photo */}
       <Footer onNavigate={handleNavigation} t={t.footer} />
 
       {/* Interactive Modals */}
