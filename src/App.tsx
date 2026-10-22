@@ -5,14 +5,9 @@
 
 import { useState, useEffect, lazy, Suspense } from 'react';
 import Lenis from 'lenis';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Navbar } from './components/Navbar';
 import { MenuDrawer } from './components/MenuDrawer';
 import { Hero } from './components/Hero';
-import { PhilosophyScrub } from './components/PhilosophyScrub';
-import { HorizontalShowcase } from './components/HorizontalShowcase';
-import { CustomCursor } from './components/CustomCursor';
 import { WhatVectorSpaceDoes } from './components/WhatVectorSpaceDoes';
 import { WhoItIsBuiltFor } from './components/WhoItIsBuiltFor';
 import { CustomerStories } from './components/CustomerStories';
@@ -21,8 +16,6 @@ import { FAQ } from './components/FAQ';
 import { GetStarted } from './components/GetStarted';
 import { Footer } from './components/Footer';
 import { Language, getTranslations } from './utils/i18n';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const DemoModal = lazy(() =>
   import('./components/DemoModal').then((m) => ({ default: m.DemoModal }))
@@ -42,35 +35,31 @@ export default function App() {
   const [selectedStoryTitle, setSelectedStoryTitle] = useState<string | null>(null);
   const [demoInitialEmail, setDemoInitialEmail] = useState('');
 
-  // Synchronized Lenis + GSAP ScrollTrigger smooth momentum
+  // Lenis smooth scroll (skipped for users who prefer reduced motion)
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 0.9,              // snappier feel
+      easing: (t) => 1 - Math.pow(1 - t, 4),  // quartic ease-out: fast start, smooth end
       smoothWheel: true,
-      wheelMultiplier: 1.05,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.1,       // slightly amplified wheel for responsiveness
+      touchMultiplier: 1.5,       // snappier on touch/trackpad
     });
 
     (window as any).__lenis = lenis;
     window.dispatchEvent(new CustomEvent('lenis-ready', { detail: lenis }));
 
-    // Update ScrollTrigger on Lenis scroll
-    lenis.on('scroll', ScrollTrigger.update);
-
-    // Drive Lenis RAF inside GSAP ticker for 0 lag and 60/120fps sync
-    const ticker = (time: number) => {
-      lenis.raf(time * 1000);
-    };
-    gsap.ticker.add(ticker);
-    gsap.ticker.lagSmoothing(0);
+    let rafHandle: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafHandle = requestAnimationFrame(raf);
+    }
+    rafHandle = requestAnimationFrame(raf);
 
     return () => {
-      gsap.ticker.remove(ticker);
+      cancelAnimationFrame(rafHandle);
       lenis.destroy();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       delete (window as any).__lenis;
     };
   }, []);
@@ -131,9 +120,6 @@ export default function App() {
         closeLabel={t.navbar.close}
       />
 
-      {/* Smooth magnetic inertial cursor */}
-      <CustomCursor />
-
       {/* Full-width Curtain Menu Drawer */}
       <MenuDrawer
         isOpen={isMenuOpen}
@@ -143,7 +129,7 @@ export default function App() {
 
       {/* Main Page Layout Sections */}
       <main className="flex-1">
-        {/* Stage 1: Pinned Cinematic Telemetry Hero with 3D camera zoom */}
+        {/* Hero with Portrait, 3D Floating Glass Card, and Count-Up Metrics */}
         <Hero
           onOpenDemo={() => handleOpenDemo()}
           onOpenVideo={() => setIsVideoModalOpen(true)}
@@ -158,31 +144,25 @@ export default function App() {
           statsT={t.stats}
         />
 
-        {/* Stage 2: Pinned Philosophy Chamber (Word-by-word scroll illuminator) */}
-        <PhilosophyScrub />
-
-        {/* Stage 3: Pinned Horizontal Warp Showcase (Operational Systems) */}
-        <HorizontalShowcase onSelectProject={handleNavigation} />
-
-        {/* Section 4: What Vector Space Does (Hand-drawn sketch cards) */}
+        {/* Section 2: What Vector Space Does (Hand-drawn sketch cards) */}
         <WhatVectorSpaceDoes t={t.whatDoes} />
 
-        {/* Section 5: Who Vector Space Is Built For (Interactive 4-tab switcher) */}
+        {/* Section 3: Who Vector Space Is Built For (Interactive 4-tab switcher) */}
         <WhoItIsBuiltFor onOpenDemo={() => handleOpenDemo()} t={t.whoFor} />
 
-        {/* Section 6: Customer Feedback & Testimonials (Interactive metrics carousel) */}
+        {/* Section 4: Customer Feedback & Testimonials (Interactive metrics carousel) */}
         <CustomerStories
           onSelectStory={(title) => setSelectedStoryTitle(title)}
           t={t.stories}
         />
 
-        {/* Section 7: Certified & Compliant (SOC II, ISO 27001, GDPR, HIPAA) */}
+        {/* Section 5: Certified & Compliant (SOC II, ISO 27001, GDPR, HIPAA) */}
         <Compliance t={t.compliance} />
 
-        {/* Section 8: Frequent Questions (2-column interactive accordion) */}
+        {/* Section 6: Frequent Questions (2-column interactive accordion) */}
         <FAQ t={t.faq} />
 
-        {/* Section 9: Get Started With Vector Space (Brushed metallic banner & email form) */}
+        {/* Section 7: Get Started With Vector Space (Brushed metallic banner & email form) */}
         <GetStarted
           onSuccessDemo={(email) => handleOpenDemo(email)}
           t={t.getStarted}
